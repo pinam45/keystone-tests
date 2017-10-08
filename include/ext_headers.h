@@ -9,11 +9,17 @@ __pragma(warning(disable:4365))
 #define EXT_HEADERS_CLOSE \
 __pragma(warning(pop))
 #elif defined(__GNUC__)
+#if defined(__cplusplus)
 #define EXT_HEADERS_OPEN \
 _Pragma("GCC diagnostic push")\
 _Pragma("GCC diagnostic ignored \"-Wzero-as-null-pointer-constant\"")\
 _Pragma("GCC diagnostic ignored \"-Wconversion\"")\
 _Pragma("GCC diagnostic ignored \"-Wsuggest-override\"")
+#else
+#define EXT_HEADERS_OPEN \
+_Pragma("GCC diagnostic push")\
+_Pragma("GCC diagnostic ignored \"-Wconversion\"")
+#endif
 #define EXT_HEADERS_CLOSE \
 _Pragma("GCC diagnostic pop")
 #else
